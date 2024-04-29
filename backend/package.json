@@ -1,0 +1,24 @@
+{
+  "name": "todolist_backend",
+  "version": "1.0.0",
+  "description": "Backend para implementar a lógica de login e CRUD de tarefas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dju4mota/C214_L1_Projeto.git"
+  },
+  "author": "Samuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dju4mota/C214_L1_Projeto/issues"
+  },
+  "homepage": "https://github.com/dju4mota/C214_L1_Projeto#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2"
+  }
+}
