@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
-const List = mongoose.model('List', {
+const Lista = mongoose.model('Lista', {
     nome: String,
     cards: Object
 })
 
-module.exports = List
+module.exports = Lista

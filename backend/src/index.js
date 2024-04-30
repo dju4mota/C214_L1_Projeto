@@ -3,15 +3,19 @@ const port = process.env.port || 3000 // No arquivo .env você pode selecionar a
 
 const express = require("express")
 const mongoose = require("mongoose") // ORM usado para realizar as operações de CRUD mais fácil
+const cors = require('cors');
+const routes = require('./routes/api');
 
 const app = express()
 app.use(express.json())
+app.use(cors())
+app.use('', routes);
 
-app.get("/health", (req,res)=>{
+app.get("/health", (req, res) => {
     return res.send("App rodando")
 })
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log("A connection url definida foi:", process.env.connection_url)
     console.log("A porta definida foi:", port)
     mongoose.connect(process.env.connection_url)
