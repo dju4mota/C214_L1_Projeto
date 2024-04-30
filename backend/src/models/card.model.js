@@ -3,9 +3,9 @@ const mongoose = require("mongoose")
 const Card = mongoose.model('Card', {
     estado: String, 
     nome: String, 
-    descrição: String, 
+    descricao: String, 
     data: Date,
-    usuario: Object, 
+    usuario: String, 
     checklist: Array,
 })
 
