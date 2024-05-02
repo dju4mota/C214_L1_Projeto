@@ -20,7 +20,7 @@ jobs:
               run: npm i
 
             - name: Run unit tests
-              run: npm run test:unit
+              run: npm run test
             - uses: actions/upload-artifact@v4
               with:
                 name: Report
