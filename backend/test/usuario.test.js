@@ -14,7 +14,7 @@ beforeEach(async () => {
     await mongoose.connection.close();
   });
 
-  describe("POST /card", () => {
+  describe("POST /user", () => {
     it("should create a user", async () => {
       const res = await request(app).post("/usuario").send({
         nome: "dju", 
@@ -23,7 +23,7 @@ beforeEach(async () => {
         listas: []
       });
       expect(res.statusCode).toBe(201);
-      //expect(res.body.name).toBe("Teste");
+      
     });
     it("should not create invalid card (name undefined)", async () => {
         const res = await request(app).post("/usuario").send({
