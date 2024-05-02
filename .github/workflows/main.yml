@@ -18,11 +18,13 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  cd backend
-                  npm i
+                cd backend
+                npm i
 
             - name: Run unit tests
-              run: npm run test
+              run: |
+                cd backend
+                npm i
             - uses: actions/upload-artifact@v4
               with:
                 name: Report
