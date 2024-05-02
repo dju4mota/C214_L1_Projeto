@@ -21,3 +21,5 @@ app.listen(port, () => {
     mongoose.connect(process.env.connection_url)
     console.log("App rodando")
 })
+
+module.exports = app
