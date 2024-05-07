@@ -7,12 +7,12 @@ require("dotenv").config();
 /* Connecting to the database before each test. */
 beforeEach(async () => {
     await mongoose.connect(process.env.connection_url);
-  });
-  
-  /* Closing database connection after each test. */
-  afterEach(async () => {
-    await mongoose.connection.close();
-  });
+});
+
+/* Closing database connection after each test. */
+afterEach(async () => {
+  await mongoose.connection.close();
+});
 
   describe("POST /card", () => {
     it("should create a card", async () => {
@@ -45,36 +45,3 @@ beforeEach(async () => {
         expect(res.statusCode).toBe(400);
       });
   });
-
-
-//   describe("GET /api/products/:id", () => {
-//     it("should return a product", async () => {
-//       const res = await request(app).get(
-//         "/api/products/6331abc9e9ececcc2d449e44"
-//       );
-//       expect(res.statusCode).toBe(200);
-//       expect(res.body.name).toBe("Product 1");
-//     });
-//   });
-//   describe("PUT /api/products/:id", () => {
-//     it("should update a product", async () => {
-//       const res = await request(app)
-//         .patch("/api/products/6331abc9e9ececcc2d449e44")
-//         .send({
-//           name: "Product 4",
-//           price: 104,
-//           description: "Description 4",
-//         });
-//       expect(res.statusCode).toBe(200);
-//       expect(res.body.price).toBe(104);
-//     });
-//   });
-  
-//   describe("DELETE /api/products/:id", () => {
-//     it("should delete a product", async () => {
-//       const res = await request(app).delete(
-//         "/api/products/6331abc9e9ececcc2d449e44"
-//       );
-//       expect(res.statusCode).toBe(200);
-//     });
-//   });
