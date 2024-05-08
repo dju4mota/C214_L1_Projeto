@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Chris\",\n    \"login\": \"chris@inatel.br\",\n    \"senha\": \"admin\"\n}",
+							"raw": "{\n    \"nome\": \"Renzo\",\n    \"login\": \"renzo@inatel.br\",\n    \"senha\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -32,6 +32,70 @@
 							"port": "214",
 							"path": [
 								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Renzo\",\n    \"login\": \"renzo@inatel.br\",\n    \"senha\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:214/usuario/buscarTodos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"usuario",
+								"buscarTodos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Renzo\",\n    \"login\": \"renzo@inatel.br\",\n    \"senha\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"usuario",
+								"663bc39b7ef7316c657f851e"
 							]
 						}
 					},
@@ -90,12 +154,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:215/usuario/criarLista",
+							"raw": "http://localhost:214/usuario/criarLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "215",
+							"port": "214",
 							"path": [
 								"usuario",
 								"criarLista"
@@ -122,12 +186,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:215/usuario/listas",
+							"raw": "http://localhost:214/usuario/listas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "215",
+							"port": "214",
 							"path": [
 								"usuario",
 								"listas"
@@ -151,12 +215,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:215/usuario/atualizarLista",
+							"raw": "http://localhost:214/usuario/atualizarLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "215",
+							"port": "214",
 							"path": [
 								"usuario",
 								"atualizarLista"
@@ -180,12 +244,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:215/usuario/excluirLista",
+							"raw": "http://localhost:214/usuario/excluirLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "215",
+							"port": "214",
 							"path": [
 								"usuario",
 								"excluirLista"

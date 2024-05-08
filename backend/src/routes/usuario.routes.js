@@ -1,31 +1,77 @@
 const Usuario = require('../models/usuario.model');
 
-exports.criarUsuario = function (req, res, next) {
+exports.criarUsuario = async function (req, res, next) {
     const { nome, login, senha } = req.body
     req.body.listas = []
 
-    if (nome == undefined || login == undefined || senha == undefined) {
+    if (!nome || !login || !senha) {
         return res.status(400).json({ error: "Informe todos os dados necessários!" })
     }
 
-    Usuario.create(req.body).then(function () {
-        return res.send(201);
-    }).catch((err) => {
-        console.log("Ocorreu um erro na criação de usuário", err)
+    try {
+        const usuario = await Usuario.create(req.body)
+        return res.status(201).json({ id: usuario.id });
+        
+    } catch (error) {
+        console.log("Ocorreu um erro na criação de usuário", error)
         return res.status(500).json({ error: "Erro interno de servidor" })
-    });
+    }
 }
 
-exports.listarUsuario = function (req, res, next) {
-    Usuario.find({}, function (err, usuarios) {
-        if (err) {
-            console.log("Ocorreu um erro ao buscar os usuários", err);
-            return res.status(500).json({ error: "Erro interno de servidor" });
+exports.buscarUsuario = async function (req, res, next) {    
+    try {
+        const usuario = await Usuario.findById(req.params.idUsuario)
+        const usuarioSemSenha = {
+            id: usuario.id,
+            nome: usuario.nome, 
+            login: usuario.login, 
+            listas: usuario.listas
         }
-        return res.status(200).json(usuarios);
-    });
+        return res.status(200).json(usuarioSemSenha);
+    } catch (error) {
+        console.log("Ocorreu um erro ao buscar o usuário", error);
+        return res.status(500).json({ error: "Erro interno de servidor" });
+    }
 }
 
+exports.buscarTodos = async function (req, res, next) {
+    try {
+        const usuarios = await Usuario.find({})
+        const usuariosSemSenha = usuarios.map((user) => {
+            const newUser = {
+                id: user.id,
+                nome: user.nome, 
+                login: user.login, 
+                listas: user.listas
+            }
+            return newUser
+        })
+        return res.status(200).json(usuariosSemSenha);
+    } catch (error) {
+        console.log("Ocorreu um erro ao buscar todos os usuários", error);
+        return res.status(500).json({ error: "Erro interno de servidor" });
+    }
+}
+
+/*
+
+Passar pro padrão async await
+Adicionar essa requisição na collection do postman
+Adicionar essa rota no api.js
+{
+    "idUsuario": String,
+    "senha": String,
+    "usuarioModificado": {
+        nome
+        login
+        senha
+        listas
+    }
+}
+
+Verificar que tanto o id quando a senha estão iguais
+Só depois atualizar os campos
+*/
 exports.editarUsuario = function (req, res, next) {
     const { id } = req.params;
     const { nome, login, senha } = req.body;
@@ -43,6 +89,12 @@ exports.editarUsuario = function (req, res, next) {
     });
 }
 
+
+/*
+    Passar pro padrão async await
+    Adicionar essa requisição na collection do postman
+    Adicionar essa rota no api.js
+*/
 exports.excluirUsuario = function (req, res, next) {
     const { id } = req.params;
 

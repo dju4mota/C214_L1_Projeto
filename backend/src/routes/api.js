@@ -6,6 +6,8 @@ const rotasLista = require('./lista.routes')
 const rotasCard = require('./cards.routes')
 
 router.post('/usuario', rotasUsuario.criarUsuario);
+router.get('/usuario/buscarTodos', rotasUsuario.buscarTodos)
+router.get('/usuario/:idUsuario', rotasUsuario.buscarUsuario)
 
 router.post('/usuario/criarLista', rotasLista.criarLista);
 router.get('/usuario/listas', rotasLista.buscarListas)
