@@ -53,60 +53,48 @@ exports.buscarTodos = async function (req, res, next) {
     }
 }
 
-/*
 
-Passar pro padrão async await
-Adicionar essa requisição na collection do postman
-Adicionar essa rota no api.js
-{
-    "idUsuario": String,
-    "senha": String,
-    "usuarioModificado": {
-        nome
-        login
-        senha
-        listas
-    }
-}
-
-Verificar que tanto o id quando a senha estão iguais
-Só depois atualizar os campos
-*/
-exports.editarUsuario = function (req, res, next) {
+exports.editarUsuario = async function (req, res, next) {
     const { id } = req.params;
     const { nome, login, senha } = req.body;
 
-    if (nome === undefined || login === undefined || senha === undefined) {
-        return res.status(400).json({ error: "Informe todos os dados necessários!" });
-    }
+    try {
+        // Recupera o usuário atual do banco de dados usando o ID fornecido
+        const usuarioAtual = await Usuario.findById(id);
 
-    Usuario.findByIdAndUpdate(id, req.body, { new: true }, function (err, usuario) {
-        if (err) {
-            console.log("Ocorreu um erro ao editar o usuário", err);
-            return res.status(500).json({ error: "Erro interno de servidor" });
+        // Verifica se o usuário existe
+        if (!usuarioAtual) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
         }
+
+        // Verifica se a senha fornecida corresponde à senha do usuário atual
+        if (senha !== usuarioAtual.senha) {
+            return res.status(400).json({ error: "Senha incorreta" });
+        }
+
+        // Atualiza os campos do usuário
+        const usuario = await Usuario.findByIdAndUpdate(id, req.body, { new: true });
         return res.status(200).json(usuario);
-    });
+    } catch (error) {
+        console.log("Ocorreu um erro ao editar o usuário", error);
+        return res.status(500).json({ error: "Erro interno de servidor" });
+    }
 }
 
 
-/*
-    Passar pro padrão async await
-    Adicionar essa requisição na collection do postman
-    Adicionar essa rota no api.js
-*/
-exports.excluirUsuario = function (req, res, next) {
+exports.excluirUsuario = async function (req, res, next) {
     const { id } = req.params;
 
-    Usuario.findByIdAndDelete(id, function (err, usuario) {
-        if (err) {
-            console.log("Ocorreu um erro ao excluir o usuário", err);
-            return res.status(500).json({ error: "Erro interno de servidor" });
-        }
+    try {
+        const usuario = await Usuario.findByIdAndDelete(id);
         if (!usuario) {
             return res.status(404).json({ error: "Usuário não encontrado" });
         }
         return res.status(200).json({ message: "Usuário excluído com sucesso" });
-    });
+    } catch (error) {
+        console.log("Ocorreu um erro ao excluir o usuário", error);
+        return res.status(500).json({ error: "Erro interno de servidor" });
+    }
 }
+
 
