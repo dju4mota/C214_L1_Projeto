@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Samuel\",\n    \"login\": \"samuel.alves@ges.inatel.br\",\n    \"senha\": \"admin\"\n}",
+							"raw": "{\n    \"nome\": \"Chris\",\n    \"login\": \"chris@inatel.br\",\n    \"senha\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,6 +65,130 @@
 							"port": "214",
 							"path": [
 								"card"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lista",
+			"item": [
+				{
+					"name": "Criar lista",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nome\": \"Prova de C214\",\n    \"cards\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:215/usuario/criarLista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "215",
+							"path": [
+								"usuario",
+								"criarLista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar listas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:215/usuario/listas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "215",
+							"path": [
+								"usuario",
+								"listas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar lista",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nomeLista\": \"Prova 2 de C214\",\n    \"listaAtualizada\": {\n        \"nome\": \"Prova de C214\",\n        \"cards\": []\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:215/usuario/atualizarLista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "215",
+							"path": [
+								"usuario",
+								"atualizarLista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover lista",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nomeLista\": \"Prova de C214\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:215/usuario/excluirLista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "215",
+							"path": [
+								"usuario",
+								"excluirLista"
 							]
 						}
 					},
