@@ -4,7 +4,7 @@
   "description": "Backend para implementar a lógica de login e CRUD de tarefas",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/server.js",
     "test": "cross-env NODE_ENV=test jest --runInBand --testTimeout=20000"
   },
   "repository": {
