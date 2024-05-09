@@ -24,7 +24,8 @@ jobs:
             - name: Run unit tests
               run: |
                 cd backend
-                npm i
+                npm run test
+
             - uses: actions/upload-artifact@v4
               with:
                 name: Report
