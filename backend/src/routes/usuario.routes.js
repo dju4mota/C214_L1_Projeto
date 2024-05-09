@@ -21,6 +21,9 @@ exports.criarUsuario = async function (req, res, next) {
 exports.buscarUsuario = async function (req, res, next) {    
     try {
         const usuario = await Usuario.findById(req.params.idUsuario)
+        if (!usuario) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+        }
         const usuarioSemSenha = {
             id: usuario.id,
             nome: usuario.nome, 
@@ -55,12 +58,12 @@ exports.buscarTodos = async function (req, res, next) {
 
 
 exports.editarUsuario = async function (req, res, next) {
-    const { id } = req.params;
-    const { nome, login, senha } = req.body;
+    const { idUsuario } = req.params;
+    const { senha } = req.body;
 
     try {
         // Recupera o usuário atual do banco de dados usando o ID fornecido
-        const usuarioAtual = await Usuario.findById(id);
+        const usuarioAtual = await Usuario.findById(idUsuario);
 
         // Verifica se o usuário existe
         if (!usuarioAtual) {
@@ -73,8 +76,15 @@ exports.editarUsuario = async function (req, res, next) {
         }
 
         // Atualiza os campos do usuário
-        const usuario = await Usuario.findByIdAndUpdate(id, req.body, { new: true });
-        return res.status(200).json(usuario);
+        const usuario = await Usuario.findByIdAndUpdate(idUsuario, req.body.usuarioModificado, { new: true });
+        
+        const newUser = {
+            nome: usuario.nome, 
+            login: usuario.login, 
+            listas: usuario.listas
+        }
+        
+        return res.status(200).json(newUser);
     } catch (error) {
         console.log("Ocorreu um erro ao editar o usuário", error);
         return res.status(500).json({ error: "Erro interno de servidor" });
@@ -83,10 +93,10 @@ exports.editarUsuario = async function (req, res, next) {
 
 
 exports.excluirUsuario = async function (req, res, next) {
-    const { id } = req.params;
+    const { idUsuario } = req.params;
 
     try {
-        const usuario = await Usuario.findByIdAndDelete(id);
+        const usuario = await Usuario.findByIdAndDelete(idUsuario);
         if (!usuario) {
             return res.status(404).json({ error: "Usuário não encontrado" });
         }
