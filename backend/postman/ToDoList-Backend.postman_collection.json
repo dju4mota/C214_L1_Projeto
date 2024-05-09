@@ -38,6 +38,35 @@
 					"response": []
 				},
 				{
+					"name": "atualizar ususario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"senha\": \"1234\",\n    \"usuarioModificado\": {\n        \"nome\": \"Renzo 4\",\n        \"login\": \"renzo@inatel.br\",\n        \"senha\": \"12345\"\n    }    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"usuario",
+								"663bc39b7ef7316c657f851e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Listar Usuarios",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -71,21 +100,29 @@
 				},
 				{
 					"name": "Buscar Usuario",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Renzo\",\n    \"login\": \"renzo@inatel.br\",\n    \"senha\": \"admin\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
+						"url": {
+							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"usuario",
+								"663bc39b7ef7316c657f851e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
 						"url": {
 							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
 							"protocol": "http",
