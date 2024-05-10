@@ -29,6 +29,8 @@ cd ToDoList-Frontend
 ### Instale as dependências:
 npm install
 npm install axios
+npm install --force @material-ui/core
+npm install @material-ui/icons
 
 ### 🖥️ Uso
 ### Inicie o servidor de desenvolvimento:
