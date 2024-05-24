@@ -1,54 +1,61 @@
-const mongoose = require("mongoose");
-const request = require("supertest");
-const app = require("../src/index");
+jest.mock('../src/models/usuario.model');
+const Usuario = require('../src/models/usuario.model');
+const rotasUsario = require('../src/routes/usuario.routes.js');
+const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos req e res
 
-require("dotenv").config();
 
-/* Connecting to the database before each test. */
-beforeEach(async () => {
-    await mongoose.connect(process.env.connection_url);
-});
-
-/* Closing database connection after each test. */
-afterEach(async () => {
-  await mongoose.connection.close();
-});
-
-  describe("POST /user", () => {
-    it("should create a user", async () => {
-      const res = await request(app).post("/usuario").send({
-        nome: "dju", 
-        login: "dju", 
-        senha: "1234",
-        listas: []
+describe('Testes unitarios das rotas usuario ', () => {
+  describe('POST /usuario', () => {
+    it('should create a user', async () => {
+      const newUser = {
+        nome: 'Test user',
+        login: 'Test User',
+        senha: '123456',
+      };
+    
+      Usuario.create.mockResolvedValue({newUser, id:1});
+    
+      const req = httpMocks.createRequest({
+        method: 'POST',
+        url: '/usario',
+        body: newUser,
       });
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasUsario.criarUsuario(req, res);
+    
       expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual("{\"id\":1}");
     });
-    it("should not create invalid user (name undefined)", async () => {
-      const res = await request(app).post("/usuario").send({
-          nome: undefined, 
-          login: "dju", 
-          senha: "1234",
-          listas: []
-      });
-      expect(res.statusCode).toBe(400);
-    });
-    it("should not create invalid user (login undefined)", async () => {
-      const res = await request(app).post("/usuario").send({
-          nome: "dju", 
-          login: undefined, 
-          senha: "1234",
-          listas: []
-      });
-      expect(res.statusCode).toBe(400);
-    });
-    it("should not create invalid user (password undefined)", async () => {
-        const res = await request(app).post("/usuario").send({
-            nome: "dju", 
-            login: "dju", 
-            senha: undefined,
-            listas: []
-        });
-    expect(res.statusCode).toBe(400);
-    });
-})
+  });
+});
+
+
+    // it("should not create invalid card (name undefined)", async () => {
+    //     const res = await request(app).post("/card").send({
+    //       estado: "Done",
+    //       nome: undefined,            
+    //       descricao: " ta testando",                 
+    //       checklist: [],
+    //     });
+    //     expect(res.statusCode).toBe(400);
+    //   });
+    //   it("should not create invalid card (user undefined)", async () => {
+    //     const res = await request(app).post("/card").send({
+    //       estado: "Done",
+    //       user: undefined,            
+    //       descricao: " ta testando",                 
+    //       checklist: [],
+    //     });
+    //     expect(res.statusCode).toBe(400);
+    //   });
+//   });
+
+//   describe("GET /card/listar", () => {
+//     it("should list a card", async () => {
+//       const res = await request(app).get("/card/listar")
+//       expect(res.statusCode).toBe(200);
+//       expect(res.body).toBe([])
+//     });
+

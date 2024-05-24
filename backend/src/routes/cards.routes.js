@@ -4,6 +4,9 @@ exports.criarCard = async function (req, res, next) {
     const novoCard = req.body;
 
     try {
+        //console.log(req.body)
+        //console.log(req.body)
+
         if (novoCard.nome === undefined || novoCard.usuario === undefined) {
             return res.status(400).json({ error: "Informe o nome do Card e a qual usuário ele pertence!" });
         }
@@ -11,6 +14,7 @@ exports.criarCard = async function (req, res, next) {
         novoCard.estado = novoCard.estado === undefined || novoCard.estado === "" ? novoCard.estado = "To Do" : novoCard.estado;
 
         const card = await Card.create(novoCard);
+        console.log("Card criado com sucesso", card);
         return res.status(201).send(card);
     } catch (err) {
         console.log("Ocorreu um erro na criação do card", err);
