@@ -3,5 +3,6 @@ node_modules
 package-lock.json
 .DS*
 backend/jest-html-reporters-attach/jest_html_reporters/result.js
+backend/jest-html-reporters-attach/jest_html_reporters/
 jest_html_reporters.html
 result.js
