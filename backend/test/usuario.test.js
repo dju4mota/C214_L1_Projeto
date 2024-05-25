@@ -1,61 +1,85 @@
 jest.mock('../src/models/usuario.model');
 const Usuario = require('../src/models/usuario.model');
-const rotasUsario = require('../src/routes/usuario.routes.js');
+const rotasUsuario = require('../src/routes/usuario.routes.js');
 const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos req e res
 
 
-describe('Testes unitarios das rotas usuario ', () => {
+
+describe('Usuario Routes', () => {
   describe('POST /usuario', () => {
-    it('should create a user', async () => {
-      const newUser = {
-        nome: 'Test user',
-        login: 'Test User',
-        senha: '123456',
-      };
+
+    // variaveis para teste
+    const newUser = {
+      nome: 'dju4mota',
+      login: 'dju4mota',
+      senha: 'senha123',
+    };
+    const req = httpMocks.createRequest({
+      method: 'POST',
+      url: '/usuario',
+      body: newUser
+    });
+
+
+    it('should create a card', async () => {
+      
+      Usuario.create.mockResolvedValue(newUser);
+      
+      const res = httpMocks.createResponse();
     
-      Usuario.create.mockResolvedValue({newUser, id:1});
+      await rotasUsuario.criarUsuario(req, res);
     
-      const req = httpMocks.createRequest({
-        method: 'POST',
-        url: '/usario',
-        body: newUser,
-      });
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newUser);
+    });
+
+    it('should create two Usuarios', async () => {
+          
+      Usuario.create.mockResolvedValue(newUser);
     
       const res = httpMocks.createResponse();
     
-      await rotasUsario.criarUsuario(req, res);
+      await rotasUsuario.criarUsuario(req, res);
     
       expect(res.statusCode).toBe(201);
-      expect(res._getData()).toEqual("{\"id\":1}");
+      expect(res._getData()).toEqual(newUser);
+      await rotasUsuario.criarUsuario(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newUser);
+    });
+
+    it('should not create invalid user (login undefined)', async () => {
+      const cardInvalido = {
+        nome: 'dju4mota',
+        senha: 'senha123',
+      };
+      
+      Usuario.create.mockResolvedValue(cardInvalido);
+    
+      req.body = cardInvalido
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasUsuario.criarUsuario(req, res);
+    
+      expect(res.statusCode).toBe(400);
+    });
+    it('should not create invalid user (usuario undefined)', async () => {
+      const cardInvalido = {
+        nome: 'dju4mota',
+        senha: 'senha123',
+      };
+    
+      Usuario.create.mockResolvedValue(cardInvalido);
+    
+      req.body = cardInvalido
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasUsuario.criarUsuario(req, res);
+    
+      expect(res.statusCode).toBe(400);
     });
   });
 });
-
-
-    // it("should not create invalid card (name undefined)", async () => {
-    //     const res = await request(app).post("/card").send({
-    //       estado: "Done",
-    //       nome: undefined,            
-    //       descricao: " ta testando",                 
-    //       checklist: [],
-    //     });
-    //     expect(res.statusCode).toBe(400);
-    //   });
-    //   it("should not create invalid card (user undefined)", async () => {
-    //     const res = await request(app).post("/card").send({
-    //       estado: "Done",
-    //       user: undefined,            
-    //       descricao: " ta testando",                 
-    //       checklist: [],
-    //     });
-    //     expect(res.statusCode).toBe(400);
-    //   });
-//   });
-
-//   describe("GET /card/listar", () => {
-//     it("should list a card", async () => {
-//       const res = await request(app).get("/card/listar")
-//       expect(res.statusCode).toBe(200);
-//       expect(res.body).toBe([])
-//     });
-
