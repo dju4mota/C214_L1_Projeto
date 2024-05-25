@@ -29,7 +29,7 @@ jobs:
             - uses: actions/upload-artifact@v4
               if: failure()
               with:
-                name: Report
+                name: Report if failure
                 path: |
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest-html-reporters-attach
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest_html_reporters.html
@@ -37,7 +37,7 @@ jobs:
 
             - uses: actions/upload-artifact@v4
               with:
-                name: Report
+                name: Report if success
                 path: |
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest-html-reporters-attach
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest_html_reporters.html
