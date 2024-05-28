@@ -66,7 +66,7 @@ O backend deste projeto é construído usando Node.js, uma plataforma de tempo d
 Etapas para rodar o backend:
 
 1. Instale o Node.js: Você pode baixar o Node.js do site oficial (https://nodejs.org/). Recomenda-se que você instale a versão LTS.
-2. Clone o repositório do projeto: Você pode fazer isso usando o comando git clone [URL_DO_REPOSITÓRIO](https://github.com/dju4mota/C214_L1_Projeto).
+2. Clone o repositório do projeto: Você pode fazer isso usando o comando: git clone https://github.com/dju4mota/C214_L1_Projeto.
 3. Navegue até a pasta do backend: Use o comando cd backend
 4. Instale as dependências: Execute o comando npm install para instalar todas as dependências necessárias listadas no arquivo package.json.
 5. Configure o banco de dados MongoDB: Você precisará de uma string de conexão MongoDB. Se você estiver usando o MongoDB Atlas, pode obter essa string de conexão no painel do Atlas. Coloque essa string de conexão em um arquivo .env na raiz do seu projeto backend.
