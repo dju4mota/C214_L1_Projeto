@@ -159,20 +159,20 @@ describe('Testes unitarios das rotas card ', () => {
     };
     const req = httpMocks.createRequest({
       method: 'DELETE',
-      url: '/card',
+      url: '/card/',
       body: deletedCard,
     });
     
     it('should delete a card', async () => {
   
-      Card.findByIdAndRemove.mockResolvedValue(deletedCard);
+      Card.findByIdAndDelete.mockResolvedValue(deletedCard);
     
       const res = httpMocks.createResponse();
   
       await rotasCard.excluirCard(req, res);
   
       expect(res.statusCode).toBe(200);
-      expect(res._getData()).toEqual(deletedCard);
+      expect(res._getData()).toEqual("{\"message\":\"Card excluído com sucesso\"}");
     });
   });
 });
