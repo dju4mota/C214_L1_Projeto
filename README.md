@@ -75,3 +75,22 @@ Etapas para rodar o backend:
 ## Banco de Dados
 
 Mongo
+
+
+
+
+
+Mostrar como iniciar um projeto com jest
+    - Ter Node (com ele vem o npm)
+    - npm init -y (mostrar o packeage.json)
+    - npm i jest -D (explicar o que é o node_modules e dependência de desenvolvimento)
+    - npm init jest@latest (mostrar o jest.config e suas possibilidades)
+
+Demonstrar básico ao describe, it e toBe
+
+Mostrar a integração com a extensão
+
+Mostrar a documentacao do jest e seus matchers 
+
+Mostrar o uso de mocks
+
