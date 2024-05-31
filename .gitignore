@@ -4,3 +4,4 @@ package-lock.json
 .DS*
 backend/jest-html-reporters-attach/jest_html_reporters/
 jest_html_reporters.html
+coverage/

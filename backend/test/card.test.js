@@ -3,9 +3,30 @@ const Card = require('../src/models/card.model');
 const rotasCard = require('../src/routes/cards.routes.js');
 const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos req e res
 
+// before all
+beforeAll(() => {
+  console.log('before all');
+});
+
+// after all 
+  afterAll(() => {
+    console.log('after all');
+  });
 
 describe('Testes unitarios das rotas card ', () => {
+  
   describe('POST /card', () => {
+
+  
+  // // before each
+  // beforeEach(() => {
+  //   console.log('nested (POST/card) before each');
+  // });
+  // // after each
+  // afterEach(() => {
+  //   console.log('nested (POST/card) after each');
+  // });
+
 
     // variaveis para teste
     const newCard = {
@@ -125,6 +146,7 @@ describe('Testes unitarios das rotas card ', () => {
       expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
     });
   });
+
   describe('UPDATE /card', () => {
     const updatedCard = {
       nome: 'Updated Card',
@@ -151,6 +173,7 @@ describe('Testes unitarios das rotas card ', () => {
       expect(JSON.parse(res._getData())).toEqual(updatedCard);
     });
   });
+
   describe('DELETE /card', () => {
     const deletedCard = {
       nome: 'Deleted Card',
@@ -175,6 +198,8 @@ describe('Testes unitarios das rotas card ', () => {
       expect(res._getData()).toEqual("{\"message\":\"Card excluído com sucesso\"}");
     });
   });
+
 });
+
 
 
