@@ -3,30 +3,10 @@ const Card = require('../src/models/card.model');
 const rotasCard = require('../src/routes/cards.routes.js');
 const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos req e res
 
-// before all
-beforeAll(() => {
-  console.log('before all');
-});
-
-// after all 
-  afterAll(() => {
-    console.log('after all');
-  });
 
 describe('Testes unitarios das rotas card ', () => {
   
   describe('POST /card', () => {
-
-  
-  // // before each
-  // beforeEach(() => {
-  //   console.log('nested (POST/card) before each');
-  // });
-  // // after each
-  // afterEach(() => {
-  //   console.log('nested (POST/card) after each');
-  // });
-
 
     // variaveis para teste
     const newCard = {
@@ -43,6 +23,20 @@ describe('Testes unitarios das rotas card ', () => {
 
     it('should create a card', async () => {
       
+      Card.create.mockResolvedValue(newCard);
+      
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newCard);
+    });
+
+    it('should create a card, with To Do as state', async () => {
+      
+      newCard.estado = "To Do"
+
       Card.create.mockResolvedValue(newCard);
       
       const res = httpMocks.createResponse();
@@ -101,6 +95,19 @@ describe('Testes unitarios das rotas card ', () => {
     
       expect(res.statusCode).toBe(400);
     });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.create.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+      req.body = newCard
+
+      await rotasCard.criarCard(req, res);
+  
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
   });
 
   describe('GET /card', () => {
@@ -167,11 +174,34 @@ describe('Testes unitarios das rotas card ', () => {
   
       await rotasCard.editarCard(req, res);
   
-      expect(res.statusCode).toBe(200);
-      
+      expect(res.statusCode).toBe(200);      
 
       expect(JSON.parse(res._getData())).toEqual(updatedCard);
     });
+
+    it('should not edit a card, card not found', async () => {
+      
+      Card.findByIdAndUpdate.mockResolvedValue();
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.editarCard(req, res);
+  
+      expect(res.statusCode).toBe(404);      
+      expect(res._getData()).toEqual( "{\"error\":\"Card não encontrado\"}");  
+
+    });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.findByIdAndUpdate.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+
+      await rotasCard.editarCard(req, res);
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
   });
 
   describe('DELETE /card', () => {
@@ -197,6 +227,30 @@ describe('Testes unitarios das rotas card ', () => {
       expect(res.statusCode).toBe(200);
       expect(res._getData()).toEqual("{\"message\":\"Card excluído com sucesso\"}");
     });
+
+    it('should not delete a card, card not found', async () => {
+      
+      Card.findByIdAndDelete.mockResolvedValue();
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.excluirCard(req, res);
+  
+      expect(res.statusCode).toBe(404);      
+      expect(res._getData()).toEqual( "{\"error\":\"Card não encontrado\"}");  
+
+    });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.findByIdAndDelete.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+
+      await rotasCard.excluirCard(req, res);
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
   });
 
 });

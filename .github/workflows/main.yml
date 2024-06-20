@@ -42,3 +42,18 @@ jobs:
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest-html-reporters-attach
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest_html_reporters.html
                   - name: Test Results
+
+            - uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                name: Test Results
+                path: |
+                  /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/coverage
+                  - name: Test Coverage
+
+            - uses: actions/upload-artifact@v4
+              with:
+                name: Test Results
+                path: |
+                  /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/coverage
+                  - name: Test Coverage
