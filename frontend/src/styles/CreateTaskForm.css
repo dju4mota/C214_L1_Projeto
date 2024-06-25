@@ -1,0 +1,35 @@
+/* src/styles/CreateTaskForm.css */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: auto;
+}
+
+.task-form input, .task-form textarea {
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.task-form textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.task-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.task-form button:hover {
+  background-color: #0056b3;
+}

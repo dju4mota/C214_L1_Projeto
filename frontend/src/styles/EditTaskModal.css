@@ -1,0 +1,57 @@
+/* src/styles/EditTaskModal.css */
+.edit-task-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.edit-task-modal h2 {
+  margin-top: 0;
+}
+
+.edit-task-modal form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.edit-task-modal form label input,
+.edit-task-modal form label textarea,
+.edit-task-modal form label select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.edit-task-modal form label button {
+  display: block;
+  margin-top: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.edit-task-modal form label button:hover {
+  background: #0056b3;
+}
+
+.edit-task-modal .checklist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* src/styles/TaskBoardPage.css */
+.task-board {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
