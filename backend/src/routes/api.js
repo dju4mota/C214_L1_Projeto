@@ -17,8 +17,8 @@ router.put('/usuario/lista/atualizarLista', rotasLista.atualizarLista);
 router.delete('/usuario/lista/excluirLista', rotasLista.excluirLista);
 
 router.post('/card', rotasCard.criarCard);
-router.get('/card/listar', rotasCard.listarCards); 
-router.put('/card/:idCard', rotasCard.editarCard);
-router.delete('/card/:idCard', rotasCard.excluirCard); 
+router.get('/card/listar/:idUsuario', rotasCard.listarCards); 
+router.put('/card', rotasCard.editarCard);
+router.delete('/card/', rotasCard.excluirCard); 
 
 module.exports = router;

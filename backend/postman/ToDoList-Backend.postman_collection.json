@@ -104,7 +104,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:214/usuario/667b8d4a8f91a1df99c15e76",
+							"raw": "http://localhost:214/usuario/667b8db28f91a1df99c15e7f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -112,7 +112,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
-								"667b8d4a8f91a1df99c15e76"
+								"667b8db28f91a1df99c15e7f"
 							]
 						}
 					},
@@ -144,13 +144,40 @@
 			"name": "Card",
 			"item": [
 				{
+					"name": "Listar cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:214/card/listar/667b8db28f91a1df99c15e7f?nomeLista=Prova de C214",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"card",
+								"listar",
+								"667b8db28f91a1df99c15e7f"
+							],
+							"query": [
+								{
+									"key": "nomeLista",
+									"value": "Prova de C214"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Criar card",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"estado\": \"\", \n    \"nome\": \"Lavar louça\", \n    \"descrição\": \"\", \n    \"data\": 0,\n    \"usuario\": \"1\", \n    \"checklist\": []\n}",
+							"raw": "{\n    \"estado\": \"\", \n    \"nome\": \"Estudar slide 2\", \n    \"descrição\": \"\", \n    \"data\": 1719428700,\n    \"usuario\": \"667b8db28f91a1df99c15e7f\", \n    \"checklist\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -158,7 +185,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:214/card",
+							"raw": "http://localhost:214/card?nomeLista=Prova de C214",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -166,6 +193,80 @@
 							"port": "214",
 							"path": [
 								"card"
+							],
+							"query": [
+								{
+									"key": "nomeLista",
+									"value": "Prova de C214"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Card",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estado\": \"Doing\", \n    \"nome\": \"Estudar slide 2\", \n    \"descrição\": \"\", \n    \"data\": 1719428700,\n    \"usuario\": \"667b8db28f91a1df99c15e7f\", \n    \"checklist\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:214/card?nomeLista=Prova de C214",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"card"
+							],
+							"query": [
+								{
+									"key": "nomeLista",
+									"value": "Prova de C214"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Card",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Estudar slide 1\", \n    \"usuario\": \"667b8db28f91a1df99c15e7f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:214/card?nomeLista=Prova de C214",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "214",
+							"path": [
+								"card"
+							],
+							"query": [
+								{
+									"key": "nomeLista",
+									"value": "Prova de C214"
+								}
 							]
 						}
 					},
