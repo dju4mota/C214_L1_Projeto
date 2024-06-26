@@ -8,7 +8,7 @@ const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos
 describe('Usuario Routes', () => {
   
 
-  describe('POST /usuario/criarLista', () => {
+  describe('POST /usuario/lista/criarLista', () => {
     let user
   let newLista
     beforeEach(() => {
@@ -40,7 +40,7 @@ describe('Usuario Routes', () => {
         };
         req = httpMocks.createRequest({
             method: 'POST',
-            url: '/usuario/criarLista',
+            url: '/usuario/lista/criarLista',
             body: newLista
           });
       });
@@ -116,7 +116,7 @@ describe('Usuario Routes', () => {
 
   });
   
-  describe('GET /usuario/listas', () => {
+  describe('GET /usuario/lista/:idusuario', () => {
     let user
     let newLista
     beforeEach(() => {
@@ -150,8 +150,10 @@ describe('Usuario Routes', () => {
 
         req = httpMocks.createRequest({
             method: 'GET',
-            url: '/usuario/listas',
-            body: newLista
+            url: '/usuario/lista',
+            params: {
+              idUsuario: '123'
+            }
           });
       });
 
@@ -172,10 +174,7 @@ describe('Usuario Routes', () => {
 
     it('should not get invalid list (user undefined)', async () => {
 
-        req.body = {
-            nome: 'lista 3',
-            cards: [],
-        }
+        req.params = {}
         await rotasLista.buscarListas(req, res);
         expect(res.statusCode).toBe(400);        
     });
@@ -241,7 +240,7 @@ describe('Usuario Routes', () => {
         
         req = httpMocks.createRequest({
             method: 'PUT',
-            url: '/usuario/atualizarLista',
+            url: '/usuario/lista/atualizarLista',
             body: newLista
           });
       });
@@ -340,7 +339,7 @@ describe('Usuario Routes', () => {
 
         req = httpMocks.createRequest({
             method: 'GET',
-            url: '/usuario/listas',
+            url: '/usuario/lista/listas',
             body: newLista
           });
       });
