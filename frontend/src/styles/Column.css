@@ -1,0 +1,13 @@
+/* src/styles/Column.css */
+.column {
+  margin: 8px;
+  border-radius: 4px;
+  background: #ebecf0;
+  padding: 8px;
+  flex: 1;
+}
+
+.column h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.2em;
+}
