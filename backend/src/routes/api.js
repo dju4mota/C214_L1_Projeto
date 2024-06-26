@@ -11,10 +11,10 @@ router.get('/usuario/:idUsuario', rotasUsuario.buscarUsuario);
 router.put('/usuario/:idUsuario', rotasUsuario.editarUsuario); 
 router.delete('/usuario/:idUsuario', rotasUsuario.excluirUsuario); 
 
-router.post('/usuario/criarLista', rotasLista.criarLista);
-router.get('/usuario/listas', rotasLista.buscarListas);
-router.put('/usuario/atualizarLista', rotasLista.atualizarLista);
-router.delete('/usuario/excluirLista', rotasLista.excluirLista);
+router.post('/usuario/lista/criarLista', rotasLista.criarLista);
+router.get('/usuario/lista/:idUsuario', rotasLista.buscarListas);
+router.put('/usuario/lista/atualizarLista', rotasLista.atualizarLista);
+router.delete('/usuario/lista/excluirLista', rotasLista.excluirLista);
 
 router.post('/card', rotasCard.criarCard);
 router.get('/card/listar', rotasCard.listarCards); 
