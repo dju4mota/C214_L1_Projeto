@@ -10,7 +10,16 @@ function CreateTaskForm({ addTask }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskName.trim() && description.trim() && dueDate) {
-      addTask(taskName, description, dueDate);
+      const newTask = {
+        id: `task-${Date.now()}`, // Generate a unique ID based on current timestamp
+        name: taskName,
+        description: description,
+        dueDate: dueDate,
+        estado: 'To Do', // Default to 'To Do' state
+        usuario: '1', // Default user ID, adjust as necessary
+        checklist: [], // Empty checklist initially
+      };
+      addTask(newTask);
       setTaskName('');
       setDescription('');
       setDueDate('');

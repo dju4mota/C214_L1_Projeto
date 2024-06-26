@@ -4,13 +4,13 @@ import { Droppable } from 'react-beautiful-dnd';
 import Task from './Task';
 import '../styles/TaskList.css';
 
-function TaskList({ tasks, listId }) {
+function TaskList({ tasks, listId, onEditTask, onDeleteTask }) {
   return (
     <Droppable droppableId={listId}>
       {(provided) => (
-        <div className="task-list" ref={provided.innerRef} {...provided.droppableProps}>
+        <div ref={provided.innerRef} {...provided.droppableProps} className="task-list">
           {tasks.map((task, index) => (
-            <Task key={task.id} task={task} index={index} />
+            <Task key={task.id} task={task} index={index} onSave={onEditTask} onDelete={onDeleteTask} />
           ))}
           {provided.placeholder}
         </div>
