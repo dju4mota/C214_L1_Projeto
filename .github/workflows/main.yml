@@ -24,10 +24,28 @@ jobs:
             - name: Run unit tests
               run: |
                 cd backend
-                npm i
+                npm run test
+
             - uses: actions/upload-artifact@v4
+              if: failure()
               with:
-                name: Report
+                name: Test Results
                 path: |
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest-html-reporters-attach
                   /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest_html_reporters.html
+                  - name: Test Results
+
+            - uses: actions/upload-artifact@v4
+              with:
+                name: Test Results
+                path: |
+                  /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest-html-reporters-attach
+                  /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/jest_html_reporters.html
+                  - name: Test Results
+
+            - uses: actions/upload-artifact@v4
+              with:
+                name: Test Coverage
+                path: |
+                  /home/runner/work/C214_L1_Projeto/C214_L1_Projeto/backend/coverage
+                  - name: Test Coverage

@@ -1,47 +1,259 @@
-const mongoose = require("mongoose");
-const request = require("supertest");
-const app = require("../src/index");
+jest.mock('../src/models/card.model');
+const Card = require('../src/models/card.model');
+const rotasCard = require('../src/routes/cards.routes.js');
+const httpMocks = require('node-mocks-http'); // biblioteca para mock de objetos req e res
 
-require("dotenv").config();
 
-/* Connecting to the database before each test. */
-beforeEach(async () => {
-    await mongoose.connect(process.env.connection_url);
-});
+describe('Testes unitarios das rotas card ', () => {
+  
+  describe('POST /card', () => {
 
-/* Closing database connection after each test. */
-afterEach(async () => {
-  await mongoose.connection.close();
-});
-
-  describe("POST /card", () => {
-    it("should create a card", async () => {
-      const res = await request(app).post("/card").send({
-        estado: "Done", 
-        nome: "Teste", 
-        descricao: " ta testando",         
-        usuario: "dju", 
-        checklist: [],
-      });
-      expect(res.statusCode).toBe(201);
-      //expect(res.body.name).toBe("Teste");
+    // variaveis para teste
+    const newCard = {
+      nome: 'Test Card',
+      usuario: 'Test User',
+      estado: 'Done',
+    };
+    const req = httpMocks.createRequest({
+      method: 'POST',
+      url: '/card',
+      body: newCard
     });
-    it("should not create invalid card (name undefined)", async () => {
-        const res = await request(app).post("/card").send({
-          estado: "Done",
-          nome: undefined,            
-          descricao: " ta testando",                 
-          checklist: [],
-        });
-        expect(res.statusCode).toBe(400);
-      });
-      it("should not create invalid card (user undefined)", async () => {
-        const res = await request(app).post("/card").send({
-          estado: "Done",
-          user: undefined,            
-          descricao: " ta testando",                 
-          checklist: [],
-        });
-        expect(res.statusCode).toBe(400);
-      });
+
+
+    it('should create a card', async () => {
+      
+      Card.create.mockResolvedValue(newCard);
+      
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newCard);
+    });
+
+    it('should create a card, with To Do as state', async () => {
+      
+      newCard.estado = "To Do"
+
+      Card.create.mockResolvedValue(newCard);
+      
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newCard);
+    });
+
+    it('should create two cards', async () => {
+          
+      Card.create.mockResolvedValue(newCard);
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newCard);
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(201);
+      expect(res._getData()).toEqual(newCard);
+    });
+
+    it('should not create invalid card (nome undefined)', async () => {
+      const cardInvalido = {
+        nome: 'Test Card',
+        estado: 'Done',
+      };
+      
+      Card.create.mockResolvedValue(cardInvalido);
+    
+      req.body = cardInvalido
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(400);
+    });
+    it('should not create invalid card (usuario undefined)', async () => {
+      const cardInvalido = {
+        usuario: 'usuario teste',
+        estado: 'Done',
+      };
+    
+      Card.create.mockResolvedValue(cardInvalido);
+    
+      req.body = cardInvalido
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.criarCard(req, res);
+    
+      expect(res.statusCode).toBe(400);
+    });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.create.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+      req.body = newCard
+
+      await rotasCard.criarCard(req, res);
+  
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
   });
+
+  describe('GET /card', () => {
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/card/listar',
+    });
+
+    it('should list cards', async () => {
+    
+      const cardList = [
+        {
+          nome: 'Test Card',
+          usuario: 'Test User',
+          estado: 'Done',
+          // outros campos do card
+        },
+        {
+          nome: 'Test Card 2',
+          usuario: 'Test User 2',
+          estado: 'Done',
+          // outros campos do card
+        },
+      ];
+      
+      Card.find.mockResolvedValue(cardList);  
+    
+      const res = httpMocks.createResponse();
+    
+      await rotasCard.listarCards(req, res);
+    
+      expect(res.statusCode).toBe(200);
+      expect(res._getData()).toEqual("[{\"nome\":\"Test Card\",\"usuario\":\"Test User\",\"estado\":\"Done\"},{\"nome\":\"Test Card 2\",\"usuario\":\"Test User 2\",\"estado\":\"Done\"}]");
+    });
+    it('should return a 500 status when an error occurs', async () => {
+      Card.find.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.listarCards(req, res);
+  
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+  });
+
+  describe('UPDATE /card', () => {
+    const updatedCard = {
+      nome: 'Updated Card',
+      usuario: 'Updated User',
+      estado: 'Done',
+    };
+    const req = httpMocks.createRequest({
+      method: 'PUT',
+      url: '/card/',
+      body: updatedCard,
+    });
+
+    it('should edit a card', async () => {
+      
+      Card.findByIdAndUpdate.mockResolvedValue(updatedCard);
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.editarCard(req, res);
+  
+      expect(res.statusCode).toBe(200);      
+
+      expect(JSON.parse(res._getData())).toEqual(updatedCard);
+    });
+
+    it('should not edit a card, card not found', async () => {
+      
+      Card.findByIdAndUpdate.mockResolvedValue();
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.editarCard(req, res);
+  
+      expect(res.statusCode).toBe(404);      
+      expect(res._getData()).toEqual( "{\"error\":\"Card não encontrado\"}");  
+
+    });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.findByIdAndUpdate.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+
+      await rotasCard.editarCard(req, res);
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
+  });
+
+  describe('DELETE /card', () => {
+    const deletedCard = {
+      nome: 'Deleted Card',
+      usuario: 'Deleted User',
+      estado: 'Done',
+    };
+    const req = httpMocks.createRequest({
+      method: 'DELETE',
+      url: '/card/',
+      body: deletedCard,
+    });
+    
+    it('should delete a card', async () => {
+  
+      Card.findByIdAndDelete.mockResolvedValue(deletedCard);
+    
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.excluirCard(req, res);
+  
+      expect(res.statusCode).toBe(200);
+      expect(res._getData()).toEqual("{\"message\":\"Card excluído com sucesso\"}");
+    });
+
+    it('should not delete a card, card not found', async () => {
+      
+      Card.findByIdAndDelete.mockResolvedValue();
+  
+      const res = httpMocks.createResponse();
+  
+      await rotasCard.excluirCard(req, res);
+  
+      expect(res.statusCode).toBe(404);      
+      expect(res._getData()).toEqual( "{\"error\":\"Card não encontrado\"}");  
+
+    });
+
+    it('should return a 500 status when an error occurs', async () => {
+      Card.findByIdAndDelete.mockRejectedValue(new Error('Test error'));
+  
+      const res = httpMocks.createResponse();
+
+      await rotasCard.excluirCard(req, res);
+      expect(res.statusCode).toBe(500);
+      expect(res._getData()).toEqual( "{\"error\":\"Erro interno de servidor\"}");
+    });
+
+  });
+
+});
+
+
+

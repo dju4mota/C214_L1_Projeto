@@ -8,6 +8,7 @@ const config = {
           outputPath: 'relatorio_de_testes.html',
         }],
       ],
+      collectCoverage: true,
   };
   
   module.exports = config;
