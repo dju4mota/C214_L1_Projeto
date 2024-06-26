@@ -71,26 +71,3 @@ Etapas para rodar o backend:
 4. Instale as dependências: Execute o comando npm install para instalar todas as dependências necessárias listadas no arquivo package.json.
 5. Configure o banco de dados MongoDB: Você precisará de uma string de conexão MongoDB. Se você estiver usando o MongoDB Atlas, pode obter essa string de conexão no painel do Atlas. Coloque essa string de conexão em um arquivo .env na raiz do seu projeto backend.
 6. Inicie o servidor: Execute o comando npm start para iniciar o servidor. Se tudo estiver configurado corretamente, você deve ver uma mensagem indicando que o servidor está rodando e conectado ao MongoDB.
-
-## Banco de Dados
-
-Mongo
-
-
-
-
-
-Mostrar como iniciar um projeto com jest
-    - Ter Node (com ele vem o npm)
-    - npm init -y (mostrar o packeage.json)
-    - npm i jest -D (explicar o que é o node_modules e dependência de desenvolvimento)
-    - npm init jest@latest (mostrar o jest.config e suas possibilidades)
-
-Demonstrar básico ao describe, it e toBe
-
-Mostrar a integração com a extensão
-
-Mostrar a documentacao do jest e seus matchers 
-
-Mostrar o uso de mocks
-
