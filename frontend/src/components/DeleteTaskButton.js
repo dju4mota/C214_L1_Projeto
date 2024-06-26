@@ -1,22 +1,13 @@
 // src/components/DeleteTaskButton.js
 import React from 'react';
-import PropTypes from 'prop-types';
+import '../styles/DeleteTaskButton.css';
 
-const DeleteTaskButton = ({ taskId, onDelete }) => {
-  const handleClick = () => {
-    onDelete(taskId);
-  };
-
+function DeleteTaskButton({ onDelete }) {
   return (
-    <button className="delete-task-button" onClick={handleClick}>
-      Excluir Tarefa
+    <button className="delete-task-button" onClick={onDelete}>
+      Excluir
     </button>
   );
-};
-
-DeleteTaskButton.propTypes = {
-  taskId: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
+}
 
 export default DeleteTaskButton;

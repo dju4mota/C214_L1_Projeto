@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import EditTaskModal from './EditTaskModal';
 import '../styles/Task.css';
 
-function Task({ task, index, onSave }) {
+function Task({ task, index, onSave, onDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -13,6 +13,11 @@ function Task({ task, index, onSave }) {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    onDelete(task.id);
   };
 
   return (
@@ -29,6 +34,7 @@ function Task({ task, index, onSave }) {
             <h3>{task.name}</h3>
             <p>{task.description}</p>
             <small>{task.dueDate}</small>
+            <button onClick={handleDelete} className="delete-task-button">Excluir</button>
           </div>
         )}
       </Draggable>

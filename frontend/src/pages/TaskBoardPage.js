@@ -106,6 +106,29 @@ function TaskBoardPage() {
     setSearchText(e.target.value);
   };
 
+  const handleAddTask = () => {
+    const newTaskId = `task-${Object.keys(data.tasks).length + 1}`;
+    const newTask = {
+      id: newTaskId,
+      name: 'Nova Tarefa',
+      description: 'Descrição da Nova Tarefa',
+      dueDate: '2024-07-30',
+      estado: 'To Do', // Forçando para a coluna "To Do"
+      usuario: '1',
+      checklist: [],
+    };
+
+    // Adicionar a nova tarefa ao TaskManager
+    taskManager.addTask(newTask);
+
+    // Atualizar o estado para refletir as mudanças
+    setData({
+      tasks: taskManager.getTasks(),
+      columns: taskManager.getColumns(),
+      columnOrder: taskManager.getColumnOrder(),
+    });
+  };
+
   const getFilteredTasks = (taskIds) => {
     const tasks = taskIds.map(taskId => data.tasks[taskId]);
     if (!searchText) return tasks;
@@ -125,6 +148,7 @@ function TaskBoardPage() {
         value={searchText} 
         onChange={handleSearch} 
       />
+      <button onClick={handleAddTask}>Adicionar Nova Tarefa</button>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="task-board">
           {data.columnOrder.map((columnId) => {
