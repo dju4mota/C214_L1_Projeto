@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"senha\": \"1234\",\n    \"usuarioModificado\": {\n        \"nome\": \"Renzo 4\",\n        \"login\": \"renzo@inatel.br\",\n        \"senha\": \"12345\"\n    }    \n}",
+							"raw": "{   \n    \"senha\": \"admin\",\n    \"usuarioModificado\": {\n        \"nome\": \"Renzo 4\",\n        \"login\": \"renzo@inatel.br\",\n        \"senha\": \"12345\"\n    }    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,7 +52,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"raw": "http://localhost:214/usuario/667b8d4a8f91a1df99c15e76",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -60,7 +60,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
-								"663bc39b7ef7316c657f851e"
+								"667b8d4a8f91a1df99c15e76"
 							]
 						}
 					},
@@ -76,7 +76,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Renzo\",\n    \"login\": \"renzo@inatel.br\",\n    \"senha\": \"admin\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,7 +104,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"raw": "http://localhost:214/usuario/667b8d4a8f91a1df99c15e76",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -112,7 +112,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
-								"663bc39b7ef7316c657f851e"
+								"667b8d4a8f91a1df99c15e76"
 							]
 						}
 					},
@@ -124,7 +124,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:214/usuario/663bc39b7ef7316c657f851e",
+							"raw": "http://localhost:214/usuario/667b8d4a8f91a1df99c15e76",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -132,7 +132,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
-								"663bc39b7ef7316c657f851e"
+								"667b8d4a8f91a1df99c15e76"
 							]
 						}
 					},
@@ -183,7 +183,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nome\": \"Prova de C214\",\n    \"cards\": []\n}",
+							"raw": "{\n    \"idUsuario\": \"667b8db28f91a1df99c15e7f\",\n    \"nome\": \"Prova de C214\",\n    \"cards\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:214/usuario/criarLista",
+							"raw": "http://localhost:214/usuario/lista/criarLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -199,6 +199,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
+								"lista",
 								"criarLista"
 							]
 						}
@@ -207,23 +208,11 @@
 				},
 				{
 					"name": "Buscar listas",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:214/usuario/listas",
+							"raw": "http://localhost:214/usuario/lista/667b8db28f91a1df99c15e7f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -231,7 +220,8 @@
 							"port": "214",
 							"path": [
 								"usuario",
-								"listas"
+								"lista",
+								"667b8db28f91a1df99c15e7f"
 							]
 						}
 					},
@@ -244,7 +234,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nomeLista\": \"Prova 2 de C214\",\n    \"listaAtualizada\": {\n        \"nome\": \"Prova de C214\",\n        \"cards\": []\n    }\n}",
+							"raw": "{\n    \"idUsuario\": \"667b8db28f91a1df99c15e7f\",\n    \"nomeLista\": \"Prova 3 de C214\",\n    \"listaAtualizada\": {\n        \"nome\": \"Prova 4 de C214\",\n        \"cards\": []\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -252,7 +242,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:214/usuario/atualizarLista",
+							"raw": "http://localhost:214/usuario/lista/atualizarLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -260,6 +250,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
+								"lista",
 								"atualizarLista"
 							]
 						}
@@ -273,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idUsuario\": \"663b79e917227e95029a10aa\",\n    \"nomeLista\": \"Prova de C214\"\n}",
+							"raw": "{\n    \"idUsuario\": \"667b8db28f91a1df99c15e7f\",\n    \"nomeLista\": \"Prova 4 de C214\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,7 +272,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:214/usuario/excluirLista",
+							"raw": "http://localhost:214/usuario/lista/excluirLista",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -289,6 +280,7 @@
 							"port": "214",
 							"path": [
 								"usuario",
+								"lista",
 								"excluirLista"
 							]
 						}

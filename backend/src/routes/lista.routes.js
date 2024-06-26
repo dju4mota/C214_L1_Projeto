@@ -37,12 +37,12 @@ exports.criarLista = async function (req, res, next) {
 
 exports.buscarListas = async function (req, res, nxt) {
 
-    if(!req.body.idUsuario) {
+    if(!req.params.idUsuario) {
         return res.status(400).json({ error: "Informe o id do usuário" })
     }
 
     try {
-        const usuario = await Usuario.findById(req.body.idUsuario)
+        const usuario = await Usuario.findById(req.params.idUsuario)
         if (!usuario) {
             return res.status(404).json({ error: "Usuário não encontrado" });
         }
